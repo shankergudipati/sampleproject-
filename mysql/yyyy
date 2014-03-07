@@ -1,0 +1,68 @@
+Bootstrapping Chef on 10.233.52.123
+10.233.52.123 Starting Chef Client, version 11.8.0[0m
+10.233.52.123 resolving cookbooks for run list: ["mysql"][0m
+10.233.52.123 Synchronizing Cookbooks:[0m
+10.233.52.123   - mysql[0m
+10.233.52.123 Compiling Cookbooks...[0m
+10.233.52.123 Converging 2 resources[0m
+10.233.52.123 Recipe: mysql::default[0m
+10.233.52.123   * template[/tmp/default] action create[0m (up to date)[0m
+10.233.52.123   * bash[install_mysql-server] action run[0m[0m
+10.233.52.123 ================================================================================[0m
+10.233.52.123 [31mError executing action `run` on resource 'bash[install_mysql-server]'[0m
+10.233.52.123 ================================================================================[0m
+10.233.52.123 
+10.233.52.123 [0m
+10.233.52.123 Mixlib::ShellOut::ShellCommandFailed[0m
+10.233.52.123 ------------------------------------[0m
+10.233.52.123 Expected process to exit with [0], but received '1'
+10.233.52.123 ---- Begin output of "bash"  "/tmp/chef-script20131127-21333-1v7swxh" ----
+10.233.52.123 STDOUT: 
+10.233.52.123 STDERR: debconf: DbDriver "config": /var/cache/debconf/config.dat is locked by another process: Resource temporarily unavailable
+10.233.52.123 ---- End output of "bash"  "/tmp/chef-script20131127-21333-1v7swxh" ----
+10.233.52.123 Ran "bash"  "/tmp/chef-script20131127-21333-1v7swxh" returned 1[0m
+10.233.52.123 
+10.233.52.123 [0m
+10.233.52.123 Resource Declaration:[0m
+10.233.52.123 ---------------------[0m
+10.233.52.123 # In /var/chef/cache/cookbooks/mysql/recipes/default.rb
+10.233.52.123 
+10.233.52.123  17: bash "install_mysql-server" do
+10.233.52.123  18:   code <<-EOH
+10.233.52.123  19:     cat /tmp/default | debconf-set-selections
+10.233.52.123  20:   EOH
+10.233.52.123  21:  end
+10.233.52.123  22: end
+10.233.52.123 [0m
+10.233.52.123 
+10.233.52.123 [0m
+10.233.52.123 Compiled Resource:[0m
+10.233.52.123 ------------------[0m
+10.233.52.123 # Declared in /var/chef/cache/cookbooks/mysql/recipes/default.rb:17:in `from_file'
+10.233.52.123 
+10.233.52.123 bash("install_mysql-server") do
+10.233.52.123   action "run"
+10.233.52.123   retries 0
+10.233.52.123   retry_delay 2
+10.233.52.123   command "\"bash\"  \"/tmp/chef-script20131127-21333-1v7swxh\""
+10.233.52.123   backup 5
+10.233.52.123   returns 0
+10.233.52.123   code "    cat /tmp/default | debconf-set-selections\n"
+10.233.52.123   interpreter "bash"
+10.233.52.123   cookbook_name "mysql"
+10.233.52.123   recipe_name "default"
+10.233.52.123 end
+10.233.52.123 [0m
+10.233.52.123 
+10.233.52.123 [0m
+10.233.52.123 [2013-11-27T19:50:58+05:30] ERROR: Running exception handlers
+10.233.52.123 [2013-11-27T19:50:58+05:30] ERROR: Exception handlers complete
+10.233.52.123 [2013-11-27T19:50:58+05:30] FATAL: Stacktrace dumped to /var/chef/cache/chef-stacktrace.out
+10.233.52.123 Chef Client failed. 0 resources updated[0m
+10.233.52.123 [2013-11-27T19:50:58+05:30] ERROR: bash[install_mysql-server] (mysql::default line 17) had an error: Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
+10.233.52.123 ---- Begin output of "bash"  "/tmp/chef-script20131127-21333-1v7swxh" ----
+10.233.52.123 STDOUT: 
+10.233.52.123 STDERR: debconf: DbDriver "config": /var/cache/debconf/config.dat is locked by another process: Resource temporarily unavailable
+10.233.52.123 ---- End output of "bash"  "/tmp/chef-script20131127-21333-1v7swxh" ----
+10.233.52.123 Ran "bash"  "/tmp/chef-script20131127-21333-1v7swxh" returned 1
+10.233.52.123 [2013-11-27T19:50:59+05:30] FATAL: Chef::Exceptions::ChildConvergeError: Chef run process exited unsuccessfully (exit code 1)
